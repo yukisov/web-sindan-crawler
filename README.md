@@ -1,4 +1,4 @@
-web-sindan-crawler
+クローラ耐性診断ツール
 ==================
 
 [IPA ウェブ健康診断仕様](http://www.ipa.go.jp/security/vuln/websecurity.html)の診断項目「(M)クローラへの耐性」の診断を行うコマンドラインツールです。
