@@ -1,0 +1,8 @@
+*.class
+.project
+.classpath
+.settings
+TODO.md
+/bin
+/build
+/bin
