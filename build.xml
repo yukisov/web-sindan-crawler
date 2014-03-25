@@ -30,7 +30,7 @@
      </copy>
     <!-- Jarファイルを生成する -->
      <jar destfile="${buildLibDir}/${appName}.jar"
-          excludes="*.properties,*.log,*.sh"
+          excludes="*.properties,*.log,*.sh,*.bat"
           basedir="${tmpDir}">
        <manifest>
          <attribute name="Main-Class" value="${mainClass}"/>
@@ -43,6 +43,7 @@
      </copy>
      <copy file="${confDir}/config.properties" todir="${buildConfDir}" overwrite="yes"/>
      <copy file="${confDir}/log.properties" todir="${buildConfDir}" overwrite="yes"/>
+     <copy file="${srcDir}/WSC.bat" todir="${buildDir}" overwrite="yes"/>
      <copy file="${srcDir}/WSC.sh" todir="${buildDir}" overwrite="yes"/>
      <chmod file="${buildDir}/WSC.sh" perm="ug+x" type="both"/>
      <!-- 必要なファイルをEclipse用ディレクトリにコピーする -->
