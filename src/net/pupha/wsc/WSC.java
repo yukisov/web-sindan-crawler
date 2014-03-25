@@ -35,7 +35,6 @@ public class WSC {
         wsc.init(args);
 
         try {
-            WSC.print("WSC start");
             wsc.run();
             // 正常終了
             Process.outputData("All URLs found were accessed.");
