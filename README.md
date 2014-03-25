@@ -1,18 +1,18 @@
 web-sindan-crawler
 ==================
 
-[IPA ウェブ健康診断仕様](http://www.ipa.go.jp/security/vuln/websecurity.html)の1つである「クローラへの耐性」の診断を行うコマンドラインツールです。
+[IPA ウェブ健康診断仕様](http://www.ipa.go.jp/security/vuln/websecurity.html)の診断項目「(M)クローラへの耐性」の診断を行うコマンドラインツールです。
+
+※ **本プログラムは IPA とは関係ありません。非公式です。**
 
 # このプログラムについて
-IPA ウェブ健康診断仕様([IPA 独立行政法人 情報処理推進機構：安全なウェブサイトの作り方](http://www.ipa.go.jp/security/vuln/websecurity.html))における「(M) クローラへの耐性」を自動で診断できます。
+IPA ウェブ健康診断仕様([IPA 独立行政法人 情報処理推進機構：安全なウェブサイトの作り方](http://www.ipa.go.jp/security/vuln/websecurity.html))における診断項目「(M) クローラへの耐性」を自動で診断できます。
 
 コマンドラインで診断対象となるURLを指定して実行します。以下の動作を自動で繰り返して対象サイトのクローラへの耐性を診断し、最後に診断結果を表示します。
 
 * HTTP(S)アクセスする。
 * ↓  ↑
 * レスポンスボディから内部リンクを収集する。
-
-※ **本プログラムは IPA とは関係ありません。非公式です。**
 
 # IPA ウェブ健康診断仕様について
 * [IPA 独立行政法人 情報処理推進機構：安全なウェブサイトの作り方](http://www.ipa.go.jp/security/vuln/websecurity.html)
@@ -41,7 +41,7 @@ $ cd to/build/directory
 # Linux/Macの場合、診断するURLを引数にして WSC.sh を実行します。(http(s)://は省略できます)
 $ ./WSC.sh http://www.example.com/
 # Windowsの場合は、WSC.bat を実行します。
-$ WSC.bat http://www.example.com/
+> WSC.bat http://www.example.com/
 # 対象サイトをクロールし、標準出力に簡単なアクセスログが出力されていきます。
 # 最後に診断結果が表示されます。
 ```
