@@ -236,7 +236,8 @@ public class Spider {
             e.printStackTrace();
             throw e;
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            WSC.print("URISyntaxException at the URL: " + url);
+            //e.printStackTrace();
             throw e;
         } catch (KeyManagementException e) {
             e.printStackTrace();

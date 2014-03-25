@@ -1,6 +1,7 @@
 package net.pupha.wsc.utils;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import net.pupha.wsc.WSC;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
@@ -163,32 +166,23 @@ public class UrlUtils {
      * @param url
      * @return
      */
-    //public static boolean isValidUrl(String url) {
-    //    URL rs;
-    //    try {
-    //        rs = new URL(url); // MalformedURLException
-    //        rs.toURI(); // URISyntaxException
-    //    } catch (MalformedURLException e) {
-    //        // 文字列に指定されたプロトコルが未知である場合
-    //        //e.printStackTrace();
-    //        logger.fine("MalformedURLException URL: " + url);
-    //        return false;
-    //    } catch (URISyntaxException e) {
-    //        //e.printStackTrace();
-    //        logger.fine("URISyntaxException URL: " + url);
-    //        return false;
-    //    }
-    //    return true;
-    //}
-
-    /**
-     * UrlValidator版
-     */
     public static boolean isValidUrl(String urlOrig) {
 
+        // (1) UrlValidatorを使ったチェック
         String[] schemes = {"http","https"};
         UrlValidator urlValidator = new UrlValidator(schemes);
         if (urlValidator.isValid(urlOrig)) {
+            // (2) java.net.URL を使ったチェックを行う
+            URL rs;
+            try {
+                rs = new URL(urlOrig); // MalformedURLException
+                rs.toURI(); // URISyntaxException
+            } catch (MalformedURLException e) {
+                // 文字列に指定されたプロトコルが未知である場合
+                return false;
+            } catch (URISyntaxException e) {
+                return false;
+            }
             return true;
         }
         return false;
