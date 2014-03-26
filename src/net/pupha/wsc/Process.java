@@ -408,15 +408,8 @@ public class Process {
 
         // 元のURLのHost + Pathを取得する
         String hostAndPathOrig = "";
-        //URL resourceOrig;
-        try {
-            // "/"で split して最後の要素に"."があれば、その要素を削除した状態をパス名として使用する
-            hostAndPathOrig = UrlUtils.getUrlPath(Process.getUrlOrig());
-        } catch (MalformedURLException e1) {
-            e1.printStackTrace();
-            logger.severe("Couldn't get info from the url: " + Process.getUrlOrig());
-            System.exit(1);
-        }
+        // "/"で split して最後の要素に"."があれば、その要素を削除した状態をパス名として使用する
+        hostAndPathOrig = UrlUtils.getUrlPath(Process.getUrlOrig());
 
         // urlsNotAccessをループ処理する
         URL resource;

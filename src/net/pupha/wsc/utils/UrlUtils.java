@@ -3,14 +3,9 @@ package net.pupha.wsc.utils;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import net.pupha.wsc.WSC;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
@@ -20,32 +15,38 @@ public class UrlUtils {
     private static final Logger logger = Logger.getLogger(UrlUtils.class.toString());
 
     /**
+     * フルなURLを受け取り、末端のファイル名の部分を取り除いた文字列を返す。
      *
+     * この戻り値を、相対URLで指定された href の値に足せば絶対URLになるようにする。
+     *
+     * 引数の形式： 完全なURLであることを想定する。
      * 戻り値の形式： www.example.com/aaa/
-     * URLの比較に使うだけ。
-     * 末尾にスラッシュがつく時とつかない時がある。
+     *              必ず末尾にスラッシュがつく
+     *              引数が完全なURLでなければ空文字を返す。
      *
      * e.g.
-     *   "http://www.example.com/" --> "www.example.com"
+     *   "http://www.example.com/" --> "www.example.com/"
+     *   "http://www.example.com/aaa" --> "www.example.com/"
+     *   "http://www.example.com/aaa/bbb" --> "www.example.com/aaa/"
      *
      * @param url
      * @return
      * @throws MalformedURLException
      */
-    public static String getUrlPath(String url) throws MalformedURLException {
-        URL rsc = new URL(url);
-        List<String> paths = new ArrayList<String>(Arrays.asList(rsc.getPath().split("/")));
-        if (paths.size() > 0) {
-            if (paths.get(paths.size() - 1).contains(".")) {
-                paths.set(paths.size() - 1, "");
+    public static String getUrlPath(String url) {
+        Pattern pattern = Pattern.compile("^https?://([^/]+)/?(.*?)([^/]*?)$");
+        Matcher matcher = pattern.matcher(url);
+        String m1 = "";
+        String m2 = "";
+        if (matcher.matches()) {
+            m1 = matcher.group(1);
+            m2 = matcher.group(2);
+            if (m2.length() > 0 && m2.charAt(m2.length()-1) == '/') {
+                return m1 + "/" + m2;
             }
-
-            String[] _a = new String[paths.size()];
-            paths.toArray(_a);
-            String pathOrig = StringUtils.join(_a, "/");
-            return rsc.getHost() + pathOrig;
+            return m1 + "/";
         }
-        return rsc.getHost();
+        return "";
     }
 
     /**
@@ -87,6 +88,10 @@ public class UrlUtils {
     /**
      * URLを正規化する。
      * hrefにセットされたURLを "http"から始まるフルのURLに直して返す。
+     * 
+     * 第1引数：完全なURL形式
+     * 第2引数：hrefにセットされた文字列(相対URLであることもある)
+     * 
      * @param url
      * @return
      * @throws MalformedURLException 
