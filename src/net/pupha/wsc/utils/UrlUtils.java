@@ -215,6 +215,11 @@ public class UrlUtils {
             hostLong = getHostFromUrl(url2);
         }
 
+        // 同じホストであればfalseを返す
+        if (hostShort.equals(hostLong)) {
+            return false;
+        }
+
         // 長い方の文字列を右から切り出す
         int len = hostShort.length();
         // 1つ前のピリオドを含めたドメイン部分を切り取る
@@ -225,6 +230,15 @@ public class UrlUtils {
         }
         return false;
     }
+
+    //public static boolean areSameHost(String url1, String url2) {
+    //        String host1 = getHostFromUrl(url1);
+    //        String host2 = getHostFromUrl(url2);
+    //        if (host1.equals(host2)) {
+    //            return true;
+    //        }
+    //        return false;
+    //}
 
     public static String getHostFromUrl(String url) {
 

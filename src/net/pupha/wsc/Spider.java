@@ -70,7 +70,7 @@ public class Spider {
             setStatusCode(con.getResponseCode()); // ここでHTTP通信していた
             String location = con.getHeaderField("Location");
             setTimeEnd(System.currentTimeMillis());
-            if (isRedirectable(Constant.FOLLOW_REDIRECT, getStatusCode(), location)) {
+            if (isRedirectable(Constant.FOLLOW_REDIRECT, getStatusCode(), location, url)) {
                 String fullLocation = UrlUtils.normalizeUrl(url, location);
                 processForSuccess(url, getStatusCode()); // リクエストの取得に成功した場合の処理
                 return Arrays.asList(fullLocation);
@@ -130,11 +130,19 @@ public class Spider {
     }
 
     private boolean isRedirectable(boolean followRedirect, int statusCode,
-                                   String location) {
+                                   String location, String urlOrig) {
         if (followRedirect) {
             if (statusCode >= 300 && statusCode <= 399) {
-                if (!location.isEmpty() && UrlUtils.isValidUrl(location)) {
-                    return true;
+                if (!location.isEmpty()) {
+                    String fullLocation = "";
+                    try {
+                        fullLocation = UrlUtils.normalizeUrl(urlOrig, location);
+                        if (UrlUtils.isValidUrl(fullLocation)) {
+                            return true;
+                        }
+                    } catch (MalformedURLException e) {
+                        // do nothing
+                    }
                 }
             }
         }
