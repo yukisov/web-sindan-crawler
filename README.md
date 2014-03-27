@@ -36,21 +36,28 @@
 $ git clone https://github.com/yukisov/web-sindan-crawler.git
 $ cd web-sindan-crawler
 $ ant
-# buildディレクトリが作成されますので、このディレクトリをどこかに移動するかコピーします。
-# (このままの位置でも構いません)
 ```
+buildディレクトリが作成されますので、このディレクトリをどこかに移動するかコピーします。(このままの位置でも構いません)
 
 ##使い方
+
+インストールで生成されたディレクトリに移動します。
+
 ```
-# インストールで生成されたディレクトリに移動します。
 $ cd to/build/directory
-# Linux/Macの場合、診断するURLを引数にして WSC.sh を実行します。(http(s)://は省略できます)
-$ ./WSC.sh http://www.example.com/
-# Windowsの場合は、WSC.bat を実行します。
-> WSC.bat http://www.example.com/
-# 対象サイトをクロールし、標準出力に簡単なアクセスログが出力されていきます。
-# 最後に診断結果が表示されます。
 ```
+
+診断するURLを引数にして実行します。(http(s)://は省略できます)
+
+```
+# Linux/Macの場合
+$ ./WSC.sh http://www.example.com/
+#Windowsの場合
+> WSC.bat http://www.example.com/
+```
+
+対象サイトのクロールが開始します。画面にはアクセスログが出力され、最後に診断結果が表示されます。
+
 
 ##設定ファイル
 confディレクトリ内に2つの設定ファイルがあります。
