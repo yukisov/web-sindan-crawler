@@ -17,6 +17,13 @@
 * [IPA 独立行政法人 情報処理推進機構：安全なウェブサイトの作り方](http://www.ipa.go.jp/security/vuln/websecurity.html)
 	* この中の 別冊：「ウェブ健康診断仕様」(PDF)に記述されています。
 
+##スクリーンショット
+診断実行中<br/>
+<a href="https://raw.github.com/wiki/yukisov/web-sindan-crawler/images/wsc_running.png" target="_blank"><img alt="実行中のスクリーンショット" src="https://raw.github.com/wiki/yukisov/web-sindan-crawler/images/wsc_running.png" width="600px"/></a>
+
+診断完了時<br/>
+<a href="https://raw.github.com/wiki/yukisov/web-sindan-crawler/images/wsc_finished.png" target="_blank"><img alt="診断完了時のスクリーンショット" src="https://raw.github.com/wiki/yukisov/web-sindan-crawler/images/wsc_finished.png" width="600px"/></a>
+
 
 ##開発環境
 * Mac OS X 10.9.2
