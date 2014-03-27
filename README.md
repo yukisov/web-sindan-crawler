@@ -64,7 +64,16 @@ confディレクトリ内に2つの設定ファイルがあります。
 
 ###config.properties
 * プログラムの動作を変更できます。
-* プロキシの設定や、BASIC認証が必要な場合はここで設定します。
+* プロキシの設定
+    * PROXY_HOST
+        * プロキシのホスト名もしくはIPアドレス
+    * AUTH_BASIC_PASSWORD
+        * プロキシのポート番号
+* BASIC認証の設定
+    * AUTH_BASIC_USERNAME
+        * BASIC認証のユーザー名
+    * AUTH_BASIC_PASSWORD
+        * BASIC認証のパスワード
 * その他もいろいろ設定できますが、特に変更する必要はありません。
 
 ###log.properties
