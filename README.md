@@ -83,13 +83,13 @@ confディレクトリ内に2つの設定ファイルがあります。
 ##出力内容
 プログラム実行中、以下の項目が画面に出力されていきます。
 
-| No.	| TotalTIme | Status  | Time  | URL |
+| No.	| Elapsed | Status  | RTT  | URL |
 |--------|---------|---------|-------|-----|
 |通番|経過時間<br/>(分:秒)|HTTPステータスコード|応答時間(秒)|アクセスURL|
 
 診断が終了すると以下の項目が表示されます。
 
-| Reason for the termination | Total Time | No Response Count | StatusCode 400-599 Count | Accessed URLs Total | 診断結果 | 危険度 |
+| Reason for the termination | Total elapsed time | No Response Count | StatusCode 400-599 Count | Total number of requests | 診断結果 | 危険度 |
 |------|------|------|------|------|------|------|
 | 診断終了の理由 | 合計時間(分:秒) | タイムアウトになったリクエスト数 | ステータスコードが400番台or500番台だったレスポンスの数 | アクセスしたURLの数 | 正常 or 異常 | 中 or 低 |
 
