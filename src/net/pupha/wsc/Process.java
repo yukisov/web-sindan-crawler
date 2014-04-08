@@ -438,10 +438,10 @@ public class Process {
         WSC.print("Reason for the termination : " + msg);
         // 経過時間(分)
         long elapsedTime = System.currentTimeMillis() - Process.getStartDate().getTime();
-        WSC.print("Total Time                 : " + DateTimeUtils.getMinutesSeconds(elapsedTime, "%2d:%02d"));
+        WSC.print("Total elapsed time         : " + DateTimeUtils.getMinutesSeconds(elapsedTime, "%d:%02d"));
         WSC.print("No Response Count          : " + String.valueOf(getCntNoResTotal()));
         WSC.print("StatusCode 400-599 Count   : " + String.valueOf(getCntBadStatTotal()));
-        WSC.print("Accessed URLs Total        : " + String.valueOf(getUrlsDone().size()));
+        WSC.print("Total number of requests   : " + String.valueOf(getUrlsDone().size()));
         getResult().outputData();
         WSC.print("----------------------------------------------------------------------");
     }

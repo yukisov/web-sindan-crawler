@@ -125,7 +125,7 @@ public class Spider {
         double elapsedTime = getTimeEnd() - getTimeStart();
 
         WSC.print(String.format(
-                "No::%04d" + "\t" + "TotalTime::%s" + "\t" + "Status::%03d" + "\t" + "Time::%.2f" + "\t" + "URL::%s",
+                "No::%04d" + "\t" + "Elapsed::%s" + "\t" + "Status::%03d" + "\t" + "RTT::%.2f" + "\t" + "URL::%s",
                 Process.getUrlsDone().size(), strTotalTime, responseCode, elapsedTime/1000, url));
     }
 

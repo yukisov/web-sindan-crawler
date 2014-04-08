@@ -12,6 +12,9 @@ public class DateTimeUtils {
     public static String getMinutesSeconds(long millisec, String fmt) {
         long minutes = millisec/1000/60;
         long seconds = (millisec - (minutes * 1000 * 60)) / 1000;
-        return String.format("%02d:%02d", minutes, seconds);
+        if (fmt.isEmpty()) {
+            fmt = "%d:%02d";
+        }
+        return String.format(fmt, minutes, seconds);
     }
 }
