@@ -21,24 +21,33 @@ public class Printer {
     private boolean isWritingToFile = false;
 
     // 出力ファイル名
-    private String filename = "";
+    private String filepath = "";
 
-    private Printer() {
+    private Printer(String filepath) {
+        this.filepath = filepath;
         initOutputFile();
     }
 
+    /**
+     * Initialize an output file
+     */
     private void initOutputFile() {
-           if (Constant.APPL_OUTPUT_FILE_NAME.length() == 0) {
-            this.isWritingToFile = false;
-        } else {
+
+        if (this.filepath.length() != 0) {
             this.isWritingToFile = true;
-            this.filename = getFilename(Constant.APPL_OUTPUT_FILE_NAME);
+        } else {
+            if (Constant.APPL_OUTPUT_FILE_NAME.length() == 0) {
+                this.isWritingToFile = false;
+            } else {
+                this.isWritingToFile = true;
+                this.filepath = getFilename(Constant.APPL_OUTPUT_FILE_NAME);
+            }
         }
     }
 
-    static public Printer getInstance() {
+    static public Printer getInstance(String filepath) {
         if (printer == null) {
-            printer = new Printer();
+            printer = new Printer(filepath);
         }
         return printer;
     }
@@ -52,13 +61,13 @@ public class Printer {
 
     private void writeToFile(String msg) {
         try {
-            FileOutputStream fos = new FileOutputStream(this.filename, true);
+            FileOutputStream fos = new FileOutputStream(this.filepath, true);
             this.writer = new OutputStreamWriter(fos, "UTF-8");
             this.writer.write(msg + "\n");
             this.writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-            logger.severe("Couldn't read the application output file. (" + filename + ")");
+            logger.severe("Couldn't read the application output file. (" + filepath + ")");
             System.exit(1);
         }
     }
