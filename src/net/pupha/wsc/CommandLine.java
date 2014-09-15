@@ -32,7 +32,7 @@ public class CommandLine {
         // preparing options
         this.options = new Options();
 
-        //options.addOption(HELP_SHORT, HELP_LONG, false, "show help");
+        @SuppressWarnings("static-access")
         Option help = OptionBuilder.withArgName(HELP_LONG)
                             .hasArg(false)
                             .isRequired(false)
@@ -41,7 +41,7 @@ public class CommandLine {
                             .create(HELP_SHORT);
         options.addOption(help);
 
-        //options.addOption(LOG_FILE_PATH_SHORT, LOG_FILE_PATH_LONG, true, "log file path");
+        @SuppressWarnings("static-access")
         Option logfile = OptionBuilder.withArgName(LOG_FILE_PATH_LONG)
                             .hasArg(true)
                             .isRequired(false)
