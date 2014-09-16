@@ -63,7 +63,7 @@ public class CommandLine {
         Option log_prop_file = OptionBuilder.withArgName(LOG_PROP_FILE_PATH_LONG)
                             .hasArg(true)
                             .isRequired(false)
-                            .withDescription("log properties file path")
+                            .withDescription("log properties file")
                             .withLongOpt(LOG_PROP_FILE_PATH_LONG)
                             .create(LOG_PROP_FILE_PATH_SHORT);
         this.options.addOption(log_prop_file);
