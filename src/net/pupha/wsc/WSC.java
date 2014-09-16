@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -26,14 +27,7 @@ public class WSC {
 
     private static String logfile = "";
 
-    static {
-        try {
-            LogManager.getLogManager().readConfiguration(
-                  WSC.class.getClassLoader().getResourceAsStream("log.properties"));
-        } catch (SecurityException | IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private static String logPropFile= "log.properties";
 
     public static void main(String args[]) {
 
@@ -62,7 +56,11 @@ public class WSC {
             this.commandline.showHelp();
             System.exit(0);
         }
-        WSC.logfile = this.commandline.getLogfile();
+        logfile = this.commandline.getLogfile();
+        logPropFile = this.commandline.getLogPropFile();
+        if (logPropFile.length() == 0) {
+            logPropFile = "log.properties";
+        }
         if (args.length == 0 || this.commandline.hasShowHelp()) {
             this.commandline.showHelp();
             System.exit(0);
@@ -70,8 +68,19 @@ public class WSC {
 
         this.urlOrig = args[0].trim();
 
-        // ロガーの設定
         logger = Logger.getLogger(WSC.class.toString());
+
+        // ロガーの設定
+        try {
+            LogManager.getLogManager().readConfiguration(
+                  WSC.class.getClassLoader().getResourceAsStream(WSC.logPropFile));
+        } catch (SecurityException e) {
+            e.printStackTrace();
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
 
         // URLにプロトコルがなければ "http://"を追加する。
         if (!this.urlOrig.matches("^https?://.+")) {
