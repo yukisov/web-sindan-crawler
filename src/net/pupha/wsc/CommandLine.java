@@ -14,6 +14,8 @@ public class CommandLine {
     private static final String LOG_FILE_PATH_LONG = "logfile";
     private static final String LOG_PROP_FILE_PATH_SHORT = "p";
     private static final String LOG_PROP_FILE_PATH_LONG = "log-prop-file";
+    private static final String BASIC_AUTH_USER_LONG = "http-user";
+    private static final String BASIC_AUTH_PASSWORD_LONG = "http-password";
     private static final String HELP_SHORT = "h";
     private static final String HELP_LONG = "help";
 
@@ -22,6 +24,10 @@ public class CommandLine {
     private String logfile = "";
 
     private String logPropFile = "";
+
+    private String basicUser = "";
+
+    private String basicPassword = "";
 
     private Boolean hasShowHelp = false;
 
@@ -62,6 +68,25 @@ public class CommandLine {
                             .create(LOG_PROP_FILE_PATH_SHORT);
         this.options.addOption(log_prop_file);
 
+        @SuppressWarnings("static-access")
+        Option basic_user = OptionBuilder.withArgName(BASIC_AUTH_USER_LONG)
+                            .hasArg(true)
+                            .isRequired(false)
+                            .withDescription("username for HTTP BASIC AUTH")
+                            .withLongOpt(BASIC_AUTH_USER_LONG)
+                            .create();
+        this.options.addOption(basic_user);
+
+        @SuppressWarnings("static-access")
+        Option basic_pass = OptionBuilder.withArgName(BASIC_AUTH_PASSWORD_LONG)
+                            .hasArg(true)
+                            .isRequired(false)
+                            .withDescription("password for HTTP BASIC AUTH")
+                            .withLongOpt(BASIC_AUTH_PASSWORD_LONG)
+                            .create();
+        this.options.addOption(basic_pass);
+
+
         CommandLineParser parser = new BasicParser();
         org.apache.commons.cli.CommandLine cl = null;
 
@@ -82,6 +107,16 @@ public class CommandLine {
         this.logPropFile = cl.getOptionValue(LOG_PROP_FILE_PATH_SHORT);
         if (this.logPropFile == null) {
             this.logPropFile = "";
+        }
+
+        this.basicUser = cl.getOptionValue(BASIC_AUTH_USER_LONG);
+        if (this.basicUser == null) {
+            this.basicUser = "";
+        }
+
+        this.basicPassword = cl.getOptionValue(BASIC_AUTH_PASSWORD_LONG);
+        if (this.basicPassword == null) {
+            this.basicPassword = "";
         }
 
         if (cl.hasOption(HELP_SHORT)) {
@@ -105,5 +140,13 @@ public class CommandLine {
 
     public String getLogPropFile() {
         return this.logPropFile;
+    }
+
+    public String getBasicUser() {
+        return this.basicUser;
+    }
+
+    public String getBasicPassword() {
+        return this.basicPassword;
     }
 }
