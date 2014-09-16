@@ -59,6 +59,16 @@ $ ./WSC.sh http://www.example.com/
 対象サイトのクロールが開始します。画面にはアクセスログが出力され、最後に診断結果が表示されます。
 
 
+##コマンドラインオプション
+<pre>
+usage: WSC.sh <i>URL</i>
+ -l,--logfile <logfile>          log file path
+ -p,--log-prop-file <log-prop-file>    log properties file
+ --http-password <http-password>       password for HTTP BASIC AUTH
+ --http-user <http-user>           username for HTTP BASIC AUTH
+ -h,--help              show help
+</pre>
+
 ##設定ファイル
 confディレクトリ内に2つの設定ファイルがあります。
 
