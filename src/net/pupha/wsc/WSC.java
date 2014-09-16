@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.FileHandler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
+import org.apache.commons.cli.ParseException;
 
 import net.pupha.wsc.utils.UrlUtils;
 
@@ -20,21 +23,18 @@ public class WSC {
 
     private String urlOrig;
 
-    static {
-        try {
-            LogManager.getLogManager().readConfiguration(
-                  WSC.class.getClassLoader().getResourceAsStream("log.properties"));
-        } catch (SecurityException | IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private CommandLine commandline = null;
+
+    private static String logfile = "";
+
+    private static String logPropFile= "log.properties";
 
     public static void main(String args[]) {
 
         final WSC wsc = new WSC();
-        wsc.init(args);
 
         try {
+            wsc.init(args);
             wsc.run();
             // 正常終了
             Process.outputData("All URLs found were accessed.");
@@ -48,15 +48,39 @@ public class WSC {
 
     private void init(String[] args) {
 
-        if (args.length == 0) {
-            logger.severe("Usage: supply a root url");
-            System.exit(1);
+        // handling command line parameters
+        this.commandline = new CommandLine(args);
+        try {
+            this.commandline.init();
+        } catch (ParseException e) {
+            this.commandline.showHelp();
+            System.exit(0);
+        }
+        logfile = this.commandline.getLogfile();
+        logPropFile = this.commandline.getLogPropFile();
+        if (logPropFile.length() == 0) {
+            logPropFile = "log.properties";
+        }
+        if (args.length == 0 || this.commandline.hasShowHelp()) {
+            this.commandline.showHelp();
+            System.exit(0);
         }
 
         this.urlOrig = args[0].trim();
 
-        // ロガーの設定
         logger = Logger.getLogger(WSC.class.toString());
+
+        // ロガーの設定
+        try {
+            LogManager.getLogManager().readConfiguration(
+                  WSC.class.getClassLoader().getResourceAsStream(WSC.logPropFile));
+        } catch (SecurityException e) {
+            e.printStackTrace();
+            System.exit(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
 
         // URLにプロトコルがなければ "http://"を追加する。
         if (!this.urlOrig.matches("^https?://.+")) {
@@ -95,6 +119,6 @@ public class WSC {
     }
 
     public static void print(String msg) {
-        Printer.getInstance().print(msg);
+        Printer.getInstance(WSC.logfile).print(msg);
     }
 }
