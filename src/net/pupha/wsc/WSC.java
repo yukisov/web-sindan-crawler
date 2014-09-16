@@ -65,6 +65,16 @@ public class WSC {
             System.exit(0);
         }
 
+        String basicUser = this.commandline.getBasicUser();
+        if (basicUser.length() != 0) {
+            Constant.AUTH_BASIC_USERNAME = basicUser;
+        }
+
+        String basicPass = this.commandline.getBasicPassword();
+        if (basicPass.length() != 0) {
+            Constant.AUTH_BASIC_PASSWORD = basicPass;
+        }
+
         this.urlOrig = args[0].trim();
 
         logger = Logger.getLogger(WSC.class.toString());

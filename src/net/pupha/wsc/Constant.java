@@ -14,10 +14,10 @@ public class Constant {
     public static final int PROXY_PORT;
 
     /* BASIC認証のユーザ名 */
-    public static final String AUTH_BASIC_USERNAME;
+    public static String AUTH_BASIC_USERNAME;
 
     /* BASIC認証のパスワード */
-    public static final String AUTH_BASIC_PASSWORD;
+    public static String AUTH_BASIC_PASSWORD;
 
     /* スパイダリングする深さの最大値 */
     public static final int MAX_DEPTH;
