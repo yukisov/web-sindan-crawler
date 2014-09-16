@@ -26,7 +26,7 @@ public class WSC {
 
     private static String logfile = "";
 
-    private static String logPropFile= "log.properties";
+    private static String logPropFile= "";
 
     public static void main(String args[]) {
 
