@@ -228,6 +228,10 @@ public class Spider {
             conn.setRequestMethod("GET");
             //connect.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2) Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
 
+            if (! Constant.USER_AGENT.isEmpty()) {
+                conn.setRequestProperty("User-Agent", Constant.USER_AGENT);
+            }
+
             if (! Constant.AUTH_BASIC_USERNAME.isEmpty() && ! Constant.AUTH_BASIC_PASSWORD.isEmpty()) {
                 conn.setRequestProperty("Authorization",
                         "Basic " + getBasicCrypt(Constant.AUTH_BASIC_USERNAME, Constant.AUTH_BASIC_PASSWORD));

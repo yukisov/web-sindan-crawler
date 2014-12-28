@@ -19,6 +19,9 @@ public class Constant {
     /* BASIC認証のパスワード */
     public static String AUTH_BASIC_PASSWORD;
 
+    /* User-Agent header field */
+    public static String USER_AGENT;
+
     /* スパイダリングする深さの最大値 */
     public static final int MAX_DEPTH;
 

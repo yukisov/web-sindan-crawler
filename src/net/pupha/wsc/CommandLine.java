@@ -1,5 +1,7 @@
 package net.pupha.wsc;
 
+import java.util.List;
+
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -16,8 +18,12 @@ public class CommandLine {
     private static final String LOG_PROP_FILE_PATH_LONG = "log-prop-file";
     private static final String BASIC_AUTH_USER_LONG = "http-user";
     private static final String BASIC_AUTH_PASSWORD_LONG = "http-password";
+    private static final String USER_AGENT_SHORT = "U";
+    private static final String USER_AGENT_LONG = "user-agent";
     private static final String HELP_SHORT = "h";
     private static final String HELP_LONG = "help";
+
+    private String url = "";
 
     private Options options = null;
 
@@ -28,6 +34,8 @@ public class CommandLine {
     private String basicUser = "";
 
     private String basicPassword = "";
+
+    private String userAgent = "";
 
     private Boolean hasShowHelp = false;
 
@@ -86,6 +94,14 @@ public class CommandLine {
                             .create();
         this.options.addOption(basic_pass);
 
+        @SuppressWarnings("static-access")
+        Option user_agent = OptionBuilder.withArgName(USER_AGENT_LONG)
+                            .hasArg(true)
+                            .isRequired(false)
+                            .withDescription("User-Agent header field")
+                            .withLongOpt(USER_AGENT_LONG)
+                            .create(USER_AGENT_SHORT);
+        this.options.addOption(user_agent);
 
         CommandLineParser parser = new BasicParser();
         org.apache.commons.cli.CommandLine cl = null;
@@ -119,10 +135,24 @@ public class CommandLine {
             this.basicPassword = "";
         }
 
+        this.userAgent = cl.getOptionValue(USER_AGENT_LONG);
+        if (this.userAgent == null) {
+            this.userAgent = "";
+        }
+
         if (cl.hasOption(HELP_SHORT)) {
             this.hasShowHelp = true;
         }
 
+        @SuppressWarnings("unchecked")
+        List<String> leftArgList = cl.getArgList();
+        if (!leftArgList.isEmpty()) {
+            this.url = leftArgList.get(0);
+        }
+    }
+
+    public String getUrl() {
+        return this.url;
     }
 
     public Boolean hasShowHelp() {
@@ -148,5 +178,9 @@ public class CommandLine {
 
     public String getBasicPassword() {
         return this.basicPassword;
+    }
+
+    public String getUserAgent() {
+        return this.userAgent;
     }
 }

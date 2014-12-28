@@ -75,7 +75,12 @@ public class WSC {
             Constant.AUTH_BASIC_PASSWORD = basicPass;
         }
 
-        this.urlOrig = args[0].trim();
+        String userAgent = this.commandline.getUserAgent();
+        if (userAgent.length() != 0) {
+            Constant.USER_AGENT = userAgent;
+        }
+
+        this.urlOrig = this.commandline.getUrl().trim();
 
         logger = Logger.getLogger(WSC.class.toString());
 
