@@ -41,10 +41,15 @@ public class UrlUtilsTest {
     //    fail("まだ実装されていません");
     //}
 
-    //@Test
-    //public void testIsValidUrl() {
-    //    fail("まだ実装されていません");
-    //}
+    @Test
+    public void testIsValidUrl() {
+        assertEquals(true, UrlUtils.isValidUrl("http://www.example.com/aaa/index.php"));
+        assertEquals(true, UrlUtils.isValidUrl("http://localhost.com"));
+        assertEquals(false, UrlUtils.isValidUrl("http://localhost/"));
+        assertEquals(false, UrlUtils.isValidUrl("http://localhost"));
+        assertEquals(true, UrlUtils.isValidUrl("http://127.0.0.1/"));
+        assertEquals(true, UrlUtils.isValidUrl("http://127.0.0.1"));
+    }
 
     //@Test
     //public void testAreSubDomain() {

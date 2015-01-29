@@ -96,6 +96,7 @@ public class Constant {
         }
         AUTH_BASIC_USERNAME = config.getProperty("AUTH_BASIC_USERNAME", "");
         AUTH_BASIC_PASSWORD = config.getProperty("AUTH_BASIC_PASSWORD", "");
+        USER_AGENT = config.getProperty("USER_AGENT", "");
         MAX_DEPTH = Integer.valueOf(config.getProperty("MAX_DEPTH", "5"));
         MAX_COUNT = Integer.valueOf(config.getProperty("MAX_COUNT", "100"));
         MAX_TIME = Integer.valueOf(config.getProperty("MAX_TIME", "2400"));
